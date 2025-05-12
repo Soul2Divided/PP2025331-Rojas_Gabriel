@@ -1,0 +1,22 @@
+body {
+    background-color: steelblue;
+    
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem;
+}
+
+.box1 {
+    border-radius: 2em;
+    padding: 3rem;
+}
+
+.box1 {
+    height: 35%;
+    width: 35%;
+    background-color: whitesmoke;
+}
