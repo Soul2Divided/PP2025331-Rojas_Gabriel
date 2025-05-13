@@ -1,8 +1,9 @@
 export class Serie {
-    constructor(id, url, name, lenguage, genres, image) {
+    constructor(id, url, name, language, genres, image) {
         this.id = id;
+        this.url = url;
         this.name = name;
-        this.lenguage = lenguage;
+        this.language = language;
         this.genres = genres;
         this.image = image;
     }
@@ -11,19 +12,18 @@ export class Serie {
         return JSON.stringify(objeto);
     }
 
-    static createFromJsonString(json) {
-        const dato = JSON.parse(json)
-        const s = new Serie(dato.id, dato.name, dato.lenguage, dato.genres, dato.image);
+    static createFromJsonString(dato) {
+        const s = new Serie(dato.id, dato.url, dato.name, dato.language, dato.genres, dato.image);
         return s;
     }
 
     createHtmlElement() {
         const container = document.createElement("div");
-        container.className.add("container");
+        container.classList.add("container");
 
         container.innerHTML = `
             <h2>${this.name}</h2>
-            <p>Lenguaje: ${this.lenguage}</p>
+            <p>Lenguaje: ${this.language}</p>
             <p>Generos: ${this.genres}</p>
             <img src="${this.image}" alt="Imagen de ${this.name}" style="max-width: 200px;">
         `;

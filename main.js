@@ -8,7 +8,9 @@ class Modelo {
 
 class Vista {
     constructor() {
-
+        this.seriesPrincipal = this.$("series");
+        this.btnSiguiente = this.$("siguiente");
+        this.btnAnterior = this.$("anterior");
     }
 
     $ (id) {
@@ -21,26 +23,46 @@ class Control {
         this.modelo = modelo;
         this.vista = vista;
         this.URL = "https://api.tvmaze.com/shows";
-        this.chargeData();
+        this.lastId = 0;
+        this.chargeData(0);
+        this.vista.btnSiguiente.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.paginaSiguiente();
+        });
     }
 
-    chargeData () {
-        let inicio = 1;
+    chargeData (ini) {
+        let inicio = ini;
         let fin = inicio + 6;
-        const modificarUrl = this.URL + "/2"; 
 
-        fetch(modificarUrl, {method: "GET"})
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(err => {
-                console.log({ a: err.message });
-                window.alert("Error al cargar los datos")
-            })
-            .finally(() => {
-                console.log("Promesa finalizada");
-            });
+        fetch(this.URL, {method: "GET"})
+        .then(res => res.json())
+        .then(data => {
+            const arraySeries = [];
+            for(let i=inicio; i < fin; i++) {
+                const s = Serie.createFromJsonString(data[i])
+                arraySeries.push(s);
+            }
+            
+            this.modelo.Series = arraySeries;
+
+            console.log(this.modelo.Series);
+        })
+        .catch(err => {
+            console.log({ a: err.message });
+            window.alert("Error al cargar los datos")
+        })
+        .finally(() => {
+            console.log("Promesa finalizada");
+        });
+    }
+
+    paginaSiguiente() {
+        this.modelo.Series.forEach(s => {
+            this.lastId = s.id;
+        });
+        
+        this.chargeData(this.lastId);
     }
 }
 
