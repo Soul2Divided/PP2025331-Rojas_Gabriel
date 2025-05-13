@@ -29,6 +29,10 @@ class Control {
             e.preventDefault();
             this.paginaSiguiente();
         });
+        this.vista.btnAnterior.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.paginaAnterior();
+        });
     }
 
     chargeData (ini) {
@@ -61,8 +65,17 @@ class Control {
         this.modelo.Series.forEach(s => {
             this.lastId = s.id;
         });
-        
+
         this.chargeData(this.lastId);
+    }
+
+    paginaAnterior() {
+        let n = this.modelo.Series[0].id;
+
+        if (n > 0) {
+            this.lastId = n - 7;
+            this.chargeData(this.lastId);
+        }
     }
 }
 
