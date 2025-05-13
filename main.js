@@ -16,12 +16,23 @@ class Vista {
     $ (id) {
         return document.getElementById(id);
     }
+
+    addSerie () {
+        this.seriesPrincipal.innerHTML = '';
+        
+        this.modelo.Series.forEach(dato => {
+            const serie = Serie.createFromJsonString(dato);
+            const elemento = serie.createHtmlElement();
+            this.seriesPrincipal.appendChild(elemento);
+        });
+    }
 }
 
 class Control {
     constructor(modelo, vista) {
         this.modelo = modelo;
         this.vista = vista;
+        this.vista.modelo = modelo;
         this.URL = "https://api.tvmaze.com/shows";
         this.lastId = 0;
         this.chargeData(0);
@@ -51,6 +62,8 @@ class Control {
             this.modelo.Series = arraySeries;
 
             console.log(this.modelo.Series);
+
+            this.vista.addSerie();
         })
         .catch(err => {
             console.log({ a: err.message });

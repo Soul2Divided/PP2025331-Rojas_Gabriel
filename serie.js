@@ -12,12 +12,18 @@ export class Serie {
         return JSON.stringify(objeto);
     }
 
-    static createFromJsonString(dato) {
-        const s = new Serie(dato.id, dato.url, dato.name, dato.language, dato.genres, dato.image);
-        return s;
+    static createFromJsonString (dato) {
+        return new Serie(
+            dato.id,
+            dato.url,
+            dato.name,
+            dato.language,
+            dato.genres,
+            dato.image?.medium || ""
+        );
     }
 
-    createHtmlElement() {
+    createHtmlElement () {
         const container = document.createElement("div");
         container.classList.add("container");
 
@@ -28,6 +34,10 @@ export class Serie {
             <img src="${this.image}" alt="Imagen de ${this.name}" style="max-width: 200px;">
         `;
         return container;
+    }
+
+    guardarSerie (s) {
+        localStorage.setItem("serieGuardada", JSON.stringify(s));
     }
 
 }
