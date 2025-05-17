@@ -1,5 +1,38 @@
 body {
-    background-color: steelblue;
+    background: radial-gradient(circle at top left, #5c3b1e 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    color: #f0e6dd;
+    padding: 20px;
+}
+
+header {
+    height: auto;
+    width: 100%;
+    background: linear-gradient(to right, #3c2a1e, #1a1a1a);
+    color: #f7e7d2;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #f7d9b9;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+h2 {
+    font-weight: normal;
+    font-size: 2.0rem;
+    color: #ddb892;
+}
+
+h3 {
+    font-weight: normal;
+    font-size: 1.2rem;
+    color: #ddb892;
 }
 
 .m-2 {
@@ -15,56 +48,140 @@ body {
     gap: 2rem;
 }
 
-header {
-    background-color: beige;
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    padding: 15px;
+.button-38 {
+    background-color: #FFFFFF;
+    border: 0;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #111827;
+    font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: .75rem 1rem;
+    text-align: center;
+    text-decoration: none #D1D5DB solid;
+    text-decoration-thickness: auto;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-38:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.button-38:focus-visible {
+    box-shadow: none;
 }
 
 #principal, #panel-izquierda {
     height: 5rem;
-    width: 50%;
     border-radius: 15px;
     padding: 15px;
 }
 
 #panel-izquierda {
-    background-color: beige;
+    width: 15%;
     display: flex;
     justify-content: space-evenly;
+    background: rgba(30, 20, 10, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: #f5e8dc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+#panel-izquierda a {
+    text-decoration: none;
+    color: #f5e8dc;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
 #principal {
-    background-color: beige;
-    width: auto;
     height: auto;
+    width: 80%;
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    padding: 20px;
 }
 
 .btn-section {
     display: flex;
     justify-content: space-evenly;
+    margin-top: 5%;
+    padding: 10px;
 }
 
-#series {
+#series, #seriesGuardadas {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+#guardar {
+    width: 100px;
+    margin-bottom: 5px;
+}
+
+#screenImage {
+    max-width: 300px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
 }
 
 .container {
-    background: white;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     padding: 10px;
-    width: 200px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    background: radial-gradient(circle at top left, #3c2a1e 0%, #1a1a1a 100%);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    color: #f5e8dc;
+    width: 230px;
+    margin: 20px auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
 }
 
+.container button {
+    align-self: center;
+}
+
+.container img {
+    margin-top: auto;
+}
+
 @media (max-width: 900px) {
-    #series {
+    body {
+        display: flex;
+        justify-content: center;
+        margin-left: 10%;
+    }
+
+    #series, #seriesGuardadas {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+
+    #panel-izquierda {
+        height: 10%;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     #principal {
@@ -74,9 +191,23 @@ header {
 }
 
 @media (max-width: 550px) {
-    #series {
+    body {
+        display: flex;
+        justify-content: center;
+        margin-left: 30%;
+    }
+
+    #series, #seriesGuardadas {
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    #panel-izquierda {
+        height: 10%;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     #principal {

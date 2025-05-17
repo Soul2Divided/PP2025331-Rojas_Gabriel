@@ -11,6 +11,7 @@ class Vista {
         this.seriesPrincipal = this.$("series");
         this.btnSiguiente = this.$("siguiente");
         this.btnAnterior = this.$("anterior");
+        this.principal = this.$("principal");
     }
 
     $ (id) {
@@ -19,10 +20,10 @@ class Vista {
 
     addSerie () {
         this.seriesPrincipal.innerHTML = '';
-        
-        this.modelo.Series.forEach(dato => {
+
+        this.modelo.Series.forEach((dato, index) => {
             const serie = Serie.createFromJsonString(dato);
-            const elemento = serie.createHtmlElement();
+            const elemento = serie.createHtmlElement(index, false);
             this.seriesPrincipal.appendChild(elemento);
         });
     }
@@ -44,6 +45,19 @@ class Control {
             e.preventDefault();
             this.paginaAnterior();
         });
+        this.vista.principal.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.imageURL(e);
+        })
+        this.vista.seriesPrincipal.addEventListener("click", (e) => {
+            e.preventDefault();
+            if(e.target.id === "guardar") {
+                // this.testing();
+                const index = e.target.getAttribute("data-index");
+                const serieGuardar = this.modelo.Series[index];
+                Serie.guardarSerie(serieGuardar);
+            }
+        })
     }
 
     chargeData (ini) {
@@ -89,6 +103,21 @@ class Control {
             this.lastId = n - 7;
             this.chargeData(this.lastId);
         }
+    }
+
+    imageURL(e) {
+        const target = e.target;
+
+        if (target.id === "screenImage") {
+            const idClick = target.getAttribute("data-index");
+            const urlClick = this.modelo.Series[idClick].url;
+            
+            window.open(urlClick);
+        }
+    }
+
+    testing () {
+        //localStorage.removeItem("arrayLocal");
     }
 }
 

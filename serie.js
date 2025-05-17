@@ -19,25 +19,54 @@ export class Serie {
             dato.name,
             dato.language,
             dato.genres,
-            dato.image?.medium || ""
+            dato.image
         );
     }
 
-    createHtmlElement () {
+    createHtmlElement (index, guardados) {
         const container = document.createElement("div");
         container.classList.add("container");
 
-        container.innerHTML = `
+        if (guardados) {
+            container.innerHTML = `
             <h2>${this.name}</h2>
             <p>Lenguaje: ${this.language}</p>
             <p>Generos: ${this.genres}</p>
-            <img src="${this.image}" alt="Imagen de ${this.name}" style="max-width: 200px;">
+            <img id="screenImage" data-index="${index}" src="${this.image.medium}" alt="" max-size="10px">
         `;
+        } else {
+            container.innerHTML = `
+            <h2>${this.name}</h2>
+            <p>Lenguaje: ${this.language}</p>
+            <p>Generos: ${this.genres}</p>
+            <button class="button-38" id="guardar" data-index="${index}">Guardar</button>
+            <img id="screenImage" data-index="${index}" src="${this.image.medium}" alt="" max-size="10px">
+            `;
+        }
+
         return container;
     }
 
-    guardarSerie (s) {
-        localStorage.setItem("serieGuardada", JSON.stringify(s));
-    }
+    static guardarSerie (s) {
+        let arrayLocal = localStorage.getItem('arrayLocal');
+        let flag = false;
 
+        arrayLocal = JSON.parse(arrayLocal);
+        
+        if (arrayLocal === null) {
+            arrayLocal = [];
+        }
+
+        arrayLocal.forEach(serie => {
+            if (s.id === serie.id) {
+                flag = true;
+            }
+        });
+
+        if (!flag) {
+            arrayLocal.push(s);
+        }
+
+        localStorage.setItem('arrayLocal', JSON.stringify(arrayLocal));
+    }
 }
