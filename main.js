@@ -98,9 +98,12 @@ class Control {
 
     paginaAnterior() {
         let n = this.modelo.Series[0].id;
+        this.lastId = n - 7;
 
-        if (n > 0) {
-            this.lastId = n - 7;
+        if (this.lastId > 0) {
+            this.chargeData(this.lastId);
+        } else {
+            this.lastId = 0;
             this.chargeData(this.lastId);
         }
     }
