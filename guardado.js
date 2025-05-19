@@ -1,7 +1,10 @@
 import { Serie } from "./serie.js";
 
-mostrarGuardados(getLocalArray());
+const series = getLocalArray();
+
+mostrarGuardados(series);
 ordenar();
+quitarSerie();
 
 function getLocalArray () {
     let localStorageArray = localStorage.getItem('arrayLocal');
@@ -41,4 +44,24 @@ function ordenar () {
         arr.sort((a, b) => a.id - b.id);
         mostrarGuardados(arr);
     });
+}
+
+function quitarSerie () {
+    const bodySeries = document.getElementById("seriesGuardadas");
+
+    bodySeries.addEventListener("click", (e) => {
+        const target = e.target;
+
+        if (target.id === "quitar") {
+            let index = target.getAttribute("data-index");
+            
+            alert(series[index].name + " ha sido eliminada de la lista.");
+            
+            Serie.quitarSerie(index);
+
+            series.splice(index, 1);
+
+            mostrarGuardados(series);
+        }
+    })
 }

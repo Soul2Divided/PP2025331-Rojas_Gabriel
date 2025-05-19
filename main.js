@@ -52,9 +52,11 @@ class Control {
         this.vista.seriesPrincipal.addEventListener("click", (e) => {
             e.preventDefault();
             if(e.target.id === "guardar") {
-                // this.testing();
                 const index = e.target.getAttribute("data-index");
                 const serieGuardar = this.modelo.Series[index];
+
+                alert(serieGuardar.name + " ha sido agregada a la lista de guardados.");
+
                 Serie.guardarSerie(serieGuardar);
             }
         })

@@ -32,6 +32,7 @@ export class Serie {
             <h2>${this.name}</h2>
             <p>Lenguaje: ${this.language}</p>
             <p>Generos: ${this.genres}</p>
+            <button class="button-38" id="quitar" data-index="${index}">Quitar</button>
             <img id="screenImage" data-index="${index}" src="${this.image.medium}" alt="" max-size="10px">
         `;
         } else {
@@ -66,6 +67,16 @@ export class Serie {
         if (!flag) {
             arrayLocal.push(s);
         }
+
+        localStorage.setItem('arrayLocal', JSON.stringify(arrayLocal));
+    }
+
+    static quitarSerie (index) {
+        let arrayLocal = localStorage.getItem('arrayLocal');
+
+        arrayLocal = JSON.parse(arrayLocal);
+
+        arrayLocal.splice(index, 1);
 
         localStorage.setItem('arrayLocal', JSON.stringify(arrayLocal));
     }
